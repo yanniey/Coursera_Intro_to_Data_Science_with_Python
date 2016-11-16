@@ -6,6 +6,32 @@
 ---
 ## Week 2 Basic Data Processing with Pandas
 
+Dataframe
+
+```
+import pandas as pd
+purchase_1 = pd.Series({'Name': 'Chris',
+                        'Item Purchased': 'Dog Food',
+                        'Cost': 22.50})
+purchase_2 = pd.Series({'Name': 'Kevyn',
+                        'Item Purchased': 'Kitty Litter',
+                        'Cost': 2.50})
+purchase_3 = pd.Series({'Name': 'Vinod',
+                        'Item Purchased': 'Bird Seed',
+                        'Cost': 5.00})
+df = pd.DataFrame([purchase_1, purchase_2, purchase_3], index=['Store 1', 'Store 1', 'Store 2'])
+df.head()
+```
+
+df.T.loc --> T transforms data
+
+iloc vs loc: iloc searches by index, loc searches by value
+
+Avoid chaining as it generally create a copy of the data, instead of simply viewing it.
+
+Deleting data with df.drop(). It creates a copy of the dataframe with the given rows removed.
+
+df.drop("Store 1") 
 ---
 
 
