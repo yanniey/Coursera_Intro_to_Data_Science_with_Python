@@ -31,7 +31,59 @@ Avoid chaining as it generally create a copy of the data, instead of simply view
 
 Deleting data with df.drop(). It creates a copy of the dataframe with the given rows removed.
 
+```
 df.drop("Store 1") 
+```
+
+Deleting data with del() function
+
+```
+del copy_df['Name']
+```
+
+apply 20% discount to cost
+
+```
+purchase_1 = pd.Series({'Name': 'Chris',
+                        'Item Purchased': 'Dog Food',
+                        'Cost': 22.50})
+purchase_2 = pd.Series({'Name': 'Kevyn',
+                        'Item Purchased': 'Kitty Litter',
+                        'Cost': 2.50})
+purchase_3 = pd.Series({'Name': 'Vinod',
+                        'Item Purchased': 'Bird Seed',
+                        'Cost': 5.00})
+
+df = pd.DataFrame([purchase_1, purchase_2, purchase_3], index=['Store 1', 'Store 1', 'Store 2'])
+
+
+df['Cost'] *= 0.8
+print(df)
+```
+
+Panda's read_csv() function, making first column the index
+
+```
+df = pd.read_csv('olympics.csv', index_col=0, skiprows=1)
+```
+
+Change column names with rename() method
+
+```
+for col in df.columns:
+    if col[:2]=='01':
+        df.rename(columns={col:'Gold' + col[4:]}, inplace=True)
+    if col[:2]=='02':
+        df.rename(columns={col:'Silver' + col[4:]}, inplace=True)
+    if col[:2]=='03':
+        df.rename(columns={col:'Bronze' + col[4:]}, inplace=True)
+    if col[:1]=='№':
+        df.rename(columns={col:'#' + col[1:]}, inplace=True) 
+
+df.head()
+```
+
+Boolean masking: applying a boolean (True or False) filter/mask to a dataframe/array with where() function
 ---
 
 
