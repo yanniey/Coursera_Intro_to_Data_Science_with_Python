@@ -3,9 +3,50 @@
 ### 11/2016
 
 ## Week 3 Advanced Python Pandas
-Merging dataframes based on the same index
-outer vs inner join
+Merging dataframes based on the same index. "NaN" is assigned when there's a missing value.
+Outer vs inner join
 
+Outer Join
+```
+pd.merge(df1,df2,how='outer',left_index=True,right_index=True)
+```
+Inner Join
+```
+pd.merge(df1,df2,how='inner,left_index=True,right_index=True)
+```
+Left Join: keep all information from df1
+```
+pd.merge(df1,df2,how='left',left_index=True,right_index=True)
+```
+Right Join: keep all information from df2
+```
+pd.merge(df1,df2,how='right',left_index=True,right_index=True)
+```
+Join by Column names
+```
+pd.merge(df1,df2,how='left',left_on='Name',right_on='Name')
+```
+
+Chain indexing - not recommended
+```
+df.loc['Washtenaw']['Total Population']
+```
+
+Method chaining 
+```
+(df.where(df['SUMLEV']==50)
+    .dropna()
+    .set_index(['STNAME','CTYNAME'])
+    .rename(columns={'ESTIMATESBASE2010': 'Estimates Base 2010'}))
+```
+Drop rows where 'Quantity' is 0, and rename the column 'Weight' to 'Weight(oz.)'
+```
+df = df[df.Quantity !=0].rename({'Weight':'Weight(oz.)'})
+```
+Alternatively:
+```
+print(df.drop(df[df['Quantity'] == 0].index).rename(columns={'Weight': 'Weight (oz.)'}))
+```
 
 ---
 ## Week 2 Basic Data Processing with Pandas
