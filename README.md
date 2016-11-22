@@ -2,6 +2,10 @@
 ## University of Michigan, Coursera online course
 ### 11/2016
 
+## Week 3 Advanced Python Pandas
+Merging dataframes based on the same index
+outer vs inner join
+
 
 ---
 ## Week 2 Basic Data Processing with Pandas
