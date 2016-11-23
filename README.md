@@ -4,7 +4,8 @@
 
 ## Week 3 Advanced Python Pandas
 Merging dataframes based on the same index. "NaN" is assigned when there's a missing value.
-Outer vs inner join
+
+#### Outer vs inner join
 
 Outer Join
 ```
@@ -48,6 +49,134 @@ Alternatively:
 print(df.drop(df[df['Quantity'] == 0].index).rename(columns={'Weight': 'Weight (oz.)'}))
 ```
 
+#### Apply() function which applies a function to all rows in a dataframe
+
+To apply to all rows, use axis= 1
+```
+import numpy as np
+def min_max(row):
+    data = row[['POPESTIMATE2010',
+                'POPESTIMATE2011',
+                'POPESTIMATE2012',
+                'POPESTIMATE2013',
+                'POPESTIMATE2014',
+                'POPESTIMATE2015']]
+    return pd.Series({'min': np.min(data), 'max': np.max(data)})
+
+df.apply(min_max, axis=1)
+```
+Adding the applied function to the existing dataframe (instead of creating a new one)
+```
+import numpy as np
+def min_max(row):
+    data = row[['POPESTIMATE2010',
+                'POPESTIMATE2011',
+                'POPESTIMATE2012',
+                'POPESTIMATE2013',
+                'POPESTIMATE2014',
+                'POPESTIMATE2015']]
+    row['max'] = np.max(data)
+    row['min'] = np.min(data)
+    return row
+df.apply(min_max, axis=1)
+```
+Use apply() with lambda function:
+create a function with the max of each row
+```
+rows = ['POPESTIMATE2010',
+        'POPESTIMATE2011',
+        'POPESTIMATE2012',
+        'POPESTIMATE2013',
+        'POPESTIMATE2014',
+        'POPESTIMATE2015']
+df.apply(lambda x: np.max(x[rows]), axis=1)
+```
+
+#### Groupby()
+you can use a function to be the criteria for group_by()
+```
+df = df.set_index('STNAME')
+
+def fun(item):
+    if item[0]<'M':
+        return 0
+    if item[0]<'Q':
+        return 1
+    return 2
+
+for group, frame in df.groupby(fun):
+    print('There are ' + str(len(frame)) + ' records in group ' + str(group) + ' for processing.')
+
+```
+Calculate the average/sum of a certain group with groupby() and agg()
+```
+df.groupby('STNAME').agg({'CENSUS2010POP': np.average})
+```
+```
+print(df.groupby('Category').agg('sum'))
+```
+
+#### Use apply() with groupby()
+```
+def totalweight(df, w, q):
+        return sum(df[w] * df[q])
+        
+print(df.groupby('Category').apply(totalweight, 'Weight (oz.)', 'Quantity'))
+```
+
+#### Scales
+Use astype() to change the type of scales from one to another
+
+create a list and use astype() to indicate the order with ordered = True. This enables > or < to be used on strings. 
+
+```
+df = pd.DataFrame(['A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D'],
+                  index=['excellent', 'excellent', 'excellent', 'good', 'good', 'good', 'ok', 'ok', 'ok', 'poor', 'poor'])
+df.rename(columns={0: 'Grades'}, inplace=True)
+
+grades = df['Grades'].astype('category',
+                             categories=['D', 'D+', 'C-', 'C', 'C+', 'B-', 'B', 'B+', 'A-', 'A', 'A+'],
+                             ordered=True)
+grades.head()
+```
+output is:
+```
+excellent    A+
+excellent     A
+excellent    A-
+good         B+
+good          B
+Name: Grades, dtype: category
+Categories (11, object): [D < D+ < C- < C ... B+ < A- < A < A+]
+
+```
+Use > or < functions on types, output:
+```
+excellent     True
+excellent     True
+excellent     True
+good          True
+good          True
+good          True
+ok            True
+ok           False
+ok           False
+poor         False
+poor         False
+Name: Grades, dtype: bool
+```
+
+Change this series to categorical with ordering Low < Medium < High
+
+```
+s = pd.Series(['Low', 'Low', 'High', 'Medium', 'Low', 'High', 'Low'])
+
+s.astype('category', categories=['Low', 'Medium', 'High'], ordered=True)
+```
+
+Use get_dummies() to convert boolean values into 0s and 1s
+
+#### cut()
 ---
 ## Week 2 Basic Data Processing with Pandas
 
