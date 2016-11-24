@@ -4,7 +4,12 @@
 
 Summary:
 
+
 Feedback:
+
+![My feeling while taking this course...](http://cdn.someecards.com/someecards/usercards/1330111736960_3862345.png)
+My feeling while taking this course...
+
 This is an intermediate Data Analysis course with Python. The course is difficult not only because the level of materials taught, but because the structure of the course is made in such a way that familiarity with methods is required before they are even taught in the videos. For examples, I struggled a lot with Week 2's assginment because sort_values() and groupby() were only introduced in Week 3. 
 
 To summarise, this is a solid course for someone who has a background with Panda and numpy libraries. There is a big knowledge gap between the videos and the assignments, so it's challenging for beginners. 
@@ -12,6 +17,10 @@ To summarise, this is a solid course for someone who has a background with Panda
 
 ## Week 3 Advanced Python Pandas
 Merging dataframes based on the same index. "NaN" is assigned when there's a missing value.
+
+#### iloc() and loc()
+iloc()for query based on location
+loc() for query based on label
 
 #### Outer vs inner join
 
@@ -268,7 +277,7 @@ use dayfirst = True to change the datetime into European format
 ```
 pd.to_datetime('4.7.12', dayfirst=True)
 ```
-#### Timedeltas: show difference in times
+#### Timedelta: show difference in times
 
 ```
 pd.Timestamp('9/3/2016')-pd.Timestamp('9/1/2016')
@@ -321,7 +330,14 @@ df['2016-12':]
 ```
 df.asfreq('W', method='ffill')
 ```
+#### matplotlib: visualising a timeseries
 
+```
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+df.plot()
+```
 ---
 ## Week 2 Basic Data Processing with Pandas
 
