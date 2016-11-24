@@ -220,9 +220,9 @@ print(Bikes.pivot_table(values ='Price',index = 'Manufacturer',columns = 'Bike T
 
 #### Date Functionality in Panda
 1. Timestamp
-2. DatetimeIndex
+2. DatetimeIndex (the index of 1)
 3. Period
-4. PeriodIndex
+4. PeriodIndex (the index of 3)
 
 1. Timestamp, exchangeable to Python's datetime
 ⋅⋅⋅```
@@ -233,6 +233,95 @@ print(Bikes.pivot_table(values ='Price',index = 'Manufacturer',columns = 'Bike T
 ```
 pd.Period('1/2016')
 ```
+
+3. DatetimeIndex and PeriodIndex
+DatetimeIndex
+```
+t1 = pd.Series(list('abc'), [pd.Timestamp('2016-09-01'), pd.Timestamp('2016-09-02'), pd.Timestamp('2016-09-03')])
+
+type(t1.index)
+
+```
+Output:
+```
+pandas.tseries.index.DatetimeIndex
+```
+PeriodIndex
+```
+t2 = pd.Series(list('def'), [pd.Period('2016-09'), pd.Period('2016-10'), pd.Period('2016-11')])
+type(t2.index)
+```
+Output:
+```
+pandas.tseries.period.PeriodIndex
+```
+
+Coverts datetimes to the same format with to_datetime()
+
+```
+d1 = ['2 June 2013', 'Aug 29, 2014', '2015-06-26', '7/12/16']
+ts3 = pd.DataFrame(np.random.randint(10, 100, (4,2)), index=d1, columns=list('ab'))
+ts3.index = pd.to_datetime(ts3.index)
+```
+
+use dayfirst = True to change the datetime into European format
+```
+pd.to_datetime('4.7.12', dayfirst=True)
+```
+#### Timedeltas: show difference in times
+
+```
+pd.Timestamp('9/3/2016')-pd.Timestamp('9/1/2016')
+```
+Output:
+```
+Timedelta('2 days 00:00:00')
+```
+
+Calculate datetime with timedelta
+```
+pd.Timestamp('9/2/2016 8:10AM') + pd.Timedelta('12D 3H')
+```
+Output:
+```
+Timestamp('2016-09-14 11:10:00')
+```
+
+#### Date_range()
+Create a range of dates for bi-weekly on Sundays, starting with a specific date
+
+```
+dates = pd.date_range('10-01-2016', periods=9, freq='2W-SUN')
+```
+
+#### weekday_name(): check what day of the week it is
+```
+df.index.weekday_name
+```
+
+#### diff(): find difference between each day's value
+```
+df.diff()
+```
+
+#### resample(): frequency conversion. example: find mean count for each month, will show the data as of month end. 'M' stands for month
+```
+df.resample('M').mean()
+```
+
+Find values from a specific year, month or a range of dates
+
+```
+df['2017']
+df['2016-12']
+df['2016-12':]
+<!-- from 12/2016 onwards -->
+```
+#### asfreq(): change frequency from bi-weekly to weekly, and fill NaN value with last week's data point
+```
+df.asfreq('W', method='ffill')
+```
+
 ---
 ## Week 2 Basic Data Processing with Pandas
 
