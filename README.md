@@ -2,6 +2,14 @@
 ## University of Michigan, Coursera online course
 ### 11/2016
 
+Summary:
+
+Feedback:
+This is an intermediate Data Analysis course with Python. The course is difficult not only because the level of materials taught, but because the structure of the course is made in such a way that familiarity with methods is required before they are even taught in the videos. For examples, I struggled a lot with Week 2's assginment because sort_values() and groupby() were only introduced in Week 3. 
+
+To summarise, this is a solid course for someone who has a background with Panda and numpy libraries. There is a big knowledge gap between the videos and the assignments, so it's challenging for beginners. 
+
+
 ## Week 3 Advanced Python Pandas
 Merging dataframes based on the same index. "NaN" is assigned when there's a missing value.
 
@@ -176,7 +184,55 @@ s.astype('category', categories=['Low', 'Medium', 'High'], ordered=True)
 
 Use get_dummies() to convert boolean values into 0s and 1s
 
-#### cut()
+#### cut(): to cut data into bins (i.e. to divide them equally into 10 buckets)
+
+```
+df = pd.read_csv('census.csv')
+df = df[df['SUMLEV']==50]
+df = df.set_index('STNAME').groupby(level=0)['CENSUS2010POP'].agg({'avg': np.average})
+pd.cut(df['avg'],10)
+```
+Cut a series into 3 equal-sized bins
+```
+s = pd.Series([168, 180, 174, 190, 170, 185, 179, 181, 175, 169, 182, 177, 180, 171])
+
+
+pd.cut(s, 3)
+
+# You can also add labels for the sizes [Small < Medium < Large].
+pd.cut(s, 3, labels=['Small', 'Medium', 'Large'])
+```
+
+#### Use pivot_table() to create Pivot Tables 
+
+```
+df = pd.read_csv('cars.csv')
+df.pivot_table(values='(kW)', index='YEAR', columns='Make', aggfunc=np.mean)
+```
+
+Create a pivot table that shows mean price and mean ratings for every "Manufacturer"/"Bike Type" combination
+```
+print(pd.pivot_table(Bikes, index=['Manufacturer','Bike Type']))
+
+import numpy as np
+print(Bikes.pivot_table(values ='Price',index = 'Manufacturer',columns = 'Bike Type',aggfunc=np.average))
+```
+
+#### Date Functionality in Panda
+1. Timestamp
+2. DatetimeIndex
+3. Period
+4. PeriodIndex
+
+1. Timestamp, exchangeable to Python's datetime
+⋅⋅⋅```
+⋅⋅⋅pd.Timestamp('9/1/2016 10:05AM')
+⋅⋅⋅```
+
+2. Period
+```
+pd.Period('1/2016')
+```
 ---
 ## Week 2 Basic Data Processing with Pandas
 
