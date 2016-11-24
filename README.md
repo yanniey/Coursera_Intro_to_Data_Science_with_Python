@@ -8,7 +8,8 @@ Summary:
 Feedback:
 
 ![My feeling while taking this course...](http://cdn.someecards.com/someecards/usercards/1330111736960_3862345.png)
-My feeling while taking this course...
+
+> My feeling while taking this course...
 
 This is an intermediate Data Analysis course with Python. The course is difficult not only because the level of materials taught, but because the structure of the course is made in such a way that familiarity with methods is required before they are even taught in the videos. For examples, I struggled a lot with Week 2's assginment because sort_values() and groupby() were only introduced in Week 3. 
 
