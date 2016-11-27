@@ -7,7 +7,7 @@ Despite the course name, this is an intermediate-level data science course with 
 
 Feedback:
 
-![My feeling while taking this course...](http://cdn.someecards.com/someecards/usercards/1330111736960_3862345.png)
+![My feeling while taking this course...](https://imgs.xkcd.com/comics/python.png)
 
 > My feeling while taking this course...
 
@@ -71,6 +71,69 @@ Output:
 103 tornadoes back to back in 2739.72602739726 years
 ```
 tornado_events[j]== 1 means the day when tornado took place.
+
+#### Standard deviation
+
+Draw 1000 samples of a normal distriubtion, with expected value of 0.75 and a standard deviation of 1. Result is ~ 68% of area.
+```
+distribution = np.random.normal(0.75,size=1000)
+
+np.sqrt(np.sum((np.mean(distribution)-distribution)**2)/len(distribution))
+```
+The above code is equivalent to the np.std() function:
+```
+np.std(distribution)
+```
+
+#### Kirtosis (shape of tails) with stats module
+
+Positive value = more chubby than a normal distribution
+Negative value = more flat than a normal distribution
+
+```
+import scipy.stats as stats
+stats.kurtosis(distribution)
+
+```
+Output:
+```
+-0.21162400583818153
+```
+
+#### Skew with stats module
+If skew = 0.5, then there's no skew (i.e. the distribution is symmetric)
+
+```
+stats.skew(distribution)
+```
+Output:
+```
+0.051147428570855365
+```
+
+
+#### Chi squared distribution (left-skewed)
+As the degree of freedom increases, the plot moves from left to center
+
+Degree of freedom = 2:
+```
+chi_squared_df2 = np.random.chisquare(2, size=10000)
+stats.skew(chi_squared_df2)
+```
+Output:
+```
+1.9589902136938178
+```
+
+Degree of freemdom = 5:
+```
+chi_squared_df5 = np.random.chisquare(5, size=10000)
+stats.skew(chi_squared_df5)
+```
+Output:
+```
+1.3010399138921354
+```
 
 ---
 
