@@ -16,8 +16,70 @@ This is an intermediate Data Analysis course with Python. The course is difficul
 
 In one word, this is a solid course for someone who has a background with Panda and numpy libraries. There is a big knowledge gap between the videos and the assignments, so it's challenging for beginners. 
 
+## Week 4 Statistical Analysis in Python and Project
+Binomial Distribution in numpy for coin flipping
+
+```
+np.random.binomial(1,0.5)
+```
+First term (1) is the number of times you want it to run, and second term (0.5) is the chance we get a zero
+
+```
+np.random.binomial(1000, 0.5)/1000
+```
+Flip coins 1000 times, and divide the result by 1000
+
+Run 1000 simulations of flipping coins 20 times and getting a number >= 15. 
+
+```
+x = np.random.binomial(20, .5, 10000)
+print((x>=15).mean())
+```
+Output:
+```
+0.0219
+```
+
+Get the number of events given no. of simulation. 
+"How many tornados will take place based on 100,000 simulations, given that the chance of a tornado is 0.01%?"
+
+```
+chance_of_tornado = 0.01/100
+np.random.binomial(100000,chance of tornado)
+```
+Output:
+```
+8
+```
+
+"Assume the chance of tornado is 1%. How many tornados will take place (what is the chance of tornados taking place) two days in a row based on 1000000 simulations?"
+
+```
+chance_of_tornado = 0.01
+
+tornado_events = np.random.binomial(1, chance_of_tornado, 1000000)
+    
+two_days_in_a_row = 0
+for j in range(1,len(tornado_events)-1):
+    if tornado_events[j]==1 and tornado_events[j-1]==1:
+        two_days_in_a_row+=1
+
+print('{} tornadoes back to back in {} years'.format(two_days_in_a_row, 1000000/365))
+```
+Output:
+```
+103 tornadoes back to back in 2739.72602739726 years
+```
+tornado_events[j]== 1 means the day when tornado took place.
+
+---
 
 ## Week 3 Advanced Python Pandas
+
+![Finished Week 3's assignment](http://cdn.someecards.com/someecards/usercards/MjAxMi1mNWM4MDQ3MTJkODYzMzhi.png)
+
+> Finally finished Week 3's assignment.
+
 11/27/2016 Update
 Finally finished this week's assignment! The first one took a long time. I had to relearn regular expression because of it. Learned a lot about dataframes through the practices, so I'm happy about the progress eventually, but Jesus,that was a lot of work...
 
