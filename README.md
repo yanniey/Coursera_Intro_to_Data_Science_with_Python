@@ -3,7 +3,7 @@
 ### 11/2016
 
 Summary:
-
+Despite the course name, this is an intermediate-level data science course with Python. Familiarity with Numpy and Pandas libraries is not required, but is highly recommended, as the course does get pretty intense really quickly (i.e. Week 2)
 
 Feedback:
 
@@ -13,10 +13,14 @@ Feedback:
 
 This is an intermediate Data Analysis course with Python. The course is difficult not only because the level of materials taught, but because the structure of the course is made in such a way that familiarity with methods is required before they are even taught in the videos. For examples, I struggled a lot with Week 2's assginment because sort_values() and groupby() were only introduced in Week 3. 
 
-To summarise, this is a solid course for someone who has a background with Panda and numpy libraries. There is a big knowledge gap between the videos and the assignments, so it's challenging for beginners. 
+
+In one word, this is a solid course for someone who has a background with Panda and numpy libraries. There is a big knowledge gap between the videos and the assignments, so it's challenging for beginners. 
 
 
 ## Week 3 Advanced Python Pandas
+11/27/2016 Update
+Finally finished this week's assignment! The first one took a long time. I had to relearn regular expression because of it. Learned a lot about dataframes through the practices, so I'm happy about the progress eventually, but Jesus,that was a lot of work...
+
 Merging dataframes based on the same index. "NaN" is assigned when there's a missing value.
 
 #### iloc() and loc()
@@ -70,6 +74,7 @@ print(df.drop(df[df['Quantity'] == 0].index).rename(columns={'Weight': 'Weight (
 #### Apply() function which applies a function to all rows in a dataframe
 
 To apply to all rows, use axis= 1
+
 ```
 import numpy as np
 def min_max(row):
