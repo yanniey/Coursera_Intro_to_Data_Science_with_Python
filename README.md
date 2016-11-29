@@ -134,6 +134,19 @@ Output:
 ```
 1.3010399138921354
 ```
+#### Bimodal distribution (having 2 peaks)
+
+#### Hypothesis Testing
+Alternative Hypothesis vs. Null Hypothesis
+Significance level (alpha), 
+alpha = 0.05 or 5%
+
+#### t-test: compare the means of two different populations
+stats.ttest_ind()
+
+```
+import scipy.stats as stats
+```
 
 ---
 
