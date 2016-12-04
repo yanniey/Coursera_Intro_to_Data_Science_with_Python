@@ -1,9 +1,11 @@
 # Intro to Data Science in Python
-## University of Michigan, Coursera online course
-### 11/2016
+## University of Michigan, Professor Christopher Brooks, Coursera course
+### 11/2016 - Completed on 04/12/2016
 
 Summary:
-Despite the course name, this is an intermediate-level data science course with Python. Familiarity with Numpy and Pandas libraries is not required, but is highly recommended, as the course does get pretty intense really quickly (i.e. Week 2)
+Despite the course name, this is an intermediate-level data science course with Python. Familiarity with Numpy and Pandas libraries is not required, but is highly recommended, as the course does get pretty intense really quickly (i.e. Week 2) To be honest, this is a solid course for someone who has a background with Panda and numpy libraries. However, there is a big knowledge gap between the videos and the assignments, so it's challenging for beginners. 
+
+
 
 Feedback:
 
@@ -11,12 +13,13 @@ Feedback:
 
 > My feeling while taking this course...
 
-This is an intermediate Data Analysis course with Python. The course is difficult not only because the level of materials taught, but because the structure of the course is made in such a way that familiarity with methods is required before they are even taught in the videos. For examples, I struggled a lot with Week 2's assginment because sort_values() and groupby() were only introduced in Week 3. 
+04/12/2016:
+Finally finished this...was close to giving up on it SO MANY TIMES! 
 
-
-In one word, this is a solid course for someone who has a background with Panda and numpy libraries. There is a big knowledge gap between the videos and the assignments, so it's challenging for beginners. 
 
 ## Week 4 Statistical Analysis in Python and Project
+
+
 Binomial Distribution in numpy for coin flipping
 
 ```
@@ -142,12 +145,37 @@ Significance level (alpha),
 alpha = 0.05 or 5%
 
 #### t-test: compare the means of two different populations
-stats.ttest_ind()
+
+stats.ttest_ind(): compare 2 difference samples to see if they have different means. In this case, we're using ttest_ind() to compare the average grade of assignment 1 between early users('early' dataframe) and late users('late' dataframe).
+
+Output is a tuple with a test statistic and a p-value.
+
 
 ```
 import scipy.stats as stats
+
+early = df[df['assignment1_submission'] <= '2015-12-31']
+late = df[df['assignment1_submission'] > '2015-12-31']
+
+stats.ttest_ind(early['assignment1_grade'], late['assignment1_grade'])
+```
+Output:
+```
+Ttest_indResult(statistic=1.400549944897566, pvalue=0.16148283016060577)
 ```
 
+If the p-value is >0.05(the significance value/alpha we decided previously), then we cannot reject the null hypothesis.
+
+Do the same test on assignment 2:
+```
+stats.ttest_ind(early['assignment2_grade'], late['assignment2_grade'])
+```
+Output:
+```
+Ttest_indResult(statistic=1.3239868220912567, pvalue=0.18563824610067967)
+In [ ]:
+```
+p-value is still >0.05, so we cannot reject the null hypothesis. 
 ---
 
 ## Week 3 Advanced Python Pandas
@@ -211,7 +239,8 @@ print(df.drop(df[df['Quantity'] == 0].index).rename(columns={'Weight': 'Weight (
 
 #### Apply() function which applies a function to all rows in a dataframe
 
-To apply to all rows, use axis= 1
+To apply to all columns in the same row(i.e.1 = across), use axis= 1 
+To apply to all rows in the same column (i.e. 0 = down), use axis = 0
 
 ```
 import numpy as np
